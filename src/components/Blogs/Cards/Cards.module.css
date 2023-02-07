@@ -1,0 +1,16 @@
+.cards{
+    display: flex;
+    width: 90%;
+    height: 180px;
+    margin: auto;
+    background-color: rgb(149, 198, 198);
+}
+
+.cardBox {
+    width: 80%;
+    text-align: start;
+}
+
+.cardContent{
+    width: 80%;
+}
