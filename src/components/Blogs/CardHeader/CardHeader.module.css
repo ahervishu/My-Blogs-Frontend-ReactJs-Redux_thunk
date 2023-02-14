@@ -1,0 +1,29 @@
+.userInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  padding: 0 2px;
+}
+.publisher {
+  padding: 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.userName {
+  font: 16px sans-serif;
+  font-weight: bold;
+}
+
+.publishdBy {
+  font: 12px sans-serif;
+  color: rgb(162, 155, 155);
+}
+
+hr {
+  width: 60%;
+  display: flex;
+  margin: 0;
+  align-items: start;
+}

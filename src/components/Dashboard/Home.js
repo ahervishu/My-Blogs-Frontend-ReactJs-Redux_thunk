@@ -41,7 +41,7 @@ const Home = () => {
           return (
             <div key={user.uid}>
               <Navbar user={user} />
-              <div style={{width: '80%', margin: 'auto'}}>
+              <div style={{ margin: 'auto', padding:'2px'}}>
                 <Grid
                   container
                   spacing={{ xs: 1, md: 1 }}
