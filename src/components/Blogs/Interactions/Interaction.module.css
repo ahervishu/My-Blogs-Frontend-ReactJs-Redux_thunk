@@ -1,0 +1,8 @@
+.icons{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+}
+.icons div {
+    padding: 2px 5px;
+}

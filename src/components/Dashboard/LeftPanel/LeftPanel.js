@@ -4,7 +4,7 @@ import { Carousel } from "../../Carousel/Carousel";
 export const LeftPanel = () => {
     return(
         <div style={{borderRight:'1px solid gray'}}>
-            <Carousel />
+            {/* <Carousel /> */}
             <Blogs />
         </div>
     );

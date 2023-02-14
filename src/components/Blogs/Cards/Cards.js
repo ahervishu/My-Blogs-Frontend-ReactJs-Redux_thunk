@@ -9,11 +9,11 @@ import styles from "./Cards.module.css";
 import { Grid } from "@mui/material";
 import { LeftPanel } from "../../Dashboard/LeftPanel/LeftPanel";
 
-export default function Cards() {
+export default function Cards(props) {
   const theme = useTheme();
-
+  const blogs = props.blogsData;
   return (
-    <div style={{backgroundColor: 'red'}}>
+    <div style={{backgroundColor: ''}}>
       <Grid
         container
         columns={{ xs: 1, sm: 8, md: 12 }}
@@ -30,20 +30,18 @@ export default function Cards() {
                 fontSize={22}
                 fontWeight="bold"
               >
-                3 ChatGPT Extensions to Automate Your Life
+                {blogs.blog_header}
               </Typography>
               <Typography variant="h3" gutterBottom />
-              <Typography variant="subtitle1" component="div">
-                ChatGPT on WhatsApp, Gmail, Google Sheets, your code editor, and
-                more! — Unless you’ve been living under a rock, you probably
-                know how ChatGPT is changing businesses and the way we work
-                and...
+              <Typography variant="subtitle1" component="div" className={styles.blogContent}>
+                {blogs.content}
               </Typography>
             </CardContent>
           </Box>
         </Grid>
-        <Grid item xs={2} sm={4} md={3}>
+        <Grid item xs={2} sm={4} md={3} className={styles.blogImg}>
           <CardMedia
+            className={styles.img}
             component="img"
             sx={{ width: 151, padding: 2 }}
             image="./../../../Images/nature01.jpeg"

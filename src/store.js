@@ -1,3 +1,4 @@
+import { blogsReducers } from "./Redux/Blogs/reducers/blogsReducers";
 import { loginReducers } from "./Redux/Login/reducers/loginReducers";
 import { signupReducer } from "./Redux/Signup/reducers/signupReducer";
 
@@ -8,6 +9,7 @@ const { default: thunk } = require("redux-thunk");
 const rootReducer = combineReducers({
   loginData: loginReducers,
   signupData: signupReducer,
+  allBlogs: blogsReducers,
 });
 
 const initialState = {};

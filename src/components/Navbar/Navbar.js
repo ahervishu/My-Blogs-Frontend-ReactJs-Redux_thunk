@@ -85,8 +85,11 @@ export default function Navbar(props) {
   const navigate = useNavigate();
   const getLogout = () => {
     localStorage.clear();
-    navigate("/");
+    // navigate("/");
   };
+  const getLogin = () => {
+    navigate('/');
+  }
 
   const { fname, lname } = props.user;
 
@@ -228,20 +231,37 @@ export default function Navbar(props) {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <div className={style.accountIcon}>
-                <AccountCircle className={style.AccountCircle} />
-                <small>{fname + " " + lname}</small>
-              </div>
-            </IconButton>
+            {localStorage.getItem("login") ? (
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <div className={style.accountIcon}>
+                  <AccountCircle className={style.AccountCircle} />
+                  <small>{fname + " " + lname}</small>
+                </div>
+              </IconButton>
+            ) : (
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={getLogin}
+                color="inherit"
+              >
+                <div className={style.accountIcon}>
+                  <AccountCircle className={style.AccountCircle} />
+                  <small>sign In</small>
+                </div>
+              </IconButton>
+            )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

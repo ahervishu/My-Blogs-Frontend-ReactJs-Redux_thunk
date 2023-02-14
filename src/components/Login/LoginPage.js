@@ -24,6 +24,7 @@ export const LoginPage = () => {
     if (payload) {
       localStorage.setItem("login", true);
       localStorage.setItem("user", username);
+      localStorage.setItem("userdata", JSON.stringify(payload));
     } else {
       console.log("paylod empty");
     }

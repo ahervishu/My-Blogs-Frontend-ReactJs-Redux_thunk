@@ -1,16 +1,29 @@
-.cards{
-    display: flex;
-    width: 90%;
-    height: 180px;
-    margin: auto;
-    background-color: rgb(149, 198, 198);
+.cards {
+  display: flex;
+  margin: auto;
+  background-color: rgb(149, 198, 198);
 }
 
 .cardBox {
-    width: 80%;
-    text-align: start;
+  /* text-align: start; */
+  /* height: 150px !important; */
+}
+.blogContent {
+  color: rgb(79, 80, 81);
+  max-height: 75px;
+  overflow: hidden;
+}
+.blogImg {
+  position: relative;
+  overflow: hidden;
 }
 
-.cardContent{
-    width: 80%;
+.img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80% !important;
+  height: auto !important;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
 }
