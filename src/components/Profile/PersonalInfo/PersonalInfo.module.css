@@ -1,0 +1,33 @@
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  background: #00000038;
+  width: 70%;
+  margin: auto;
+  margin-top: 80px;
+  text-align: center;
+  right: 150px;
+  padding: 35px;
+}
+.input :hover {
+  cursor: not-allowed;
+  caret-color: red;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #53d5dc7e;
+    padding: 12px;
+    padding-top: 30px;
+    text-align: center;
+  }
+  .input {
+    width: 100%;
+  }
+}

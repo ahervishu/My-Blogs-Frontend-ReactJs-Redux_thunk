@@ -4,9 +4,8 @@
   background-color: rgb(149, 198, 198);
 }
 
-.cardBox {
-  /* text-align: start; */
-  /* height: 150px !important; */
+.cardBlog :hover{
+  cursor: grabbing;
 }
 .blogContent {
   color: rgb(79, 80, 81);

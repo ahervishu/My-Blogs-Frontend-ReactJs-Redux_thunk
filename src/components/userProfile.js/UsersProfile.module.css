@@ -1,0 +1,36 @@
+.container{
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+.backgroundProfile{
+    height: 300px;
+    width: 100%;
+    background-image: url('https://images.unsplash.com/photo-1553064483-f10fe837615f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 5px;
+    background-color: aqua;
+}
+.avatar{
+    display: flex;
+    justify-content: center;
+}
+.profileImage{
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 880px) {
+    .backgroundProfile {
+      height: 200px;
+    }
+    .container{
+        width: 100%;
+    }
+    .profileImage{
+        width: 100px;
+        height: 100px;
+    }
+  }

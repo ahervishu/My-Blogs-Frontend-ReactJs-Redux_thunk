@@ -20,3 +20,25 @@ form {
   margin: 10px !important;
   max-width: 300px;
 }
+input[type="date"] {
+  /* background-color: #0080ff; */
+  padding: 15px;
+  /* position: absolute; */
+  /* transform: translate(-50%, -50%); */
+  top: 50%;
+  left: 50%;
+  font-family: "Roboto Mono", monospace;
+  color: #212020;
+  font-size: 18px;
+  border: none;
+  width: 60%;
+  border-bottom: 1px solid #212020 ;
+  outline: none;
+  border-radius: 5px;
+}
+::-webkit-calendar-picker-indicator {
+  background-color: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}

@@ -1,9 +1,10 @@
+import { Suggest } from "../../Suggestions/Suggest";
 
 
 export const RightPanel = () => {
     return(
         <div style={{}}>
-            from right panel
+            <Suggest />
         </div>
     );
 }

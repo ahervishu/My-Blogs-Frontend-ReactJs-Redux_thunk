@@ -1,13 +1,36 @@
-.accountIcon{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: auto;
-    margin: auto;
+.accountIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: auto;
+  margin: auto;
 }
-.AccountCircle{
-    margin: auto;
+.AccountCircle {
+  margin: auto;
 }
-small{
-    font-size: 12px;
+small {
+  font-size: 12px;
+}
+
+.lists {
+  list-style-type: none;
+  padding: 2px;
+  margin: 5px;
+  background: #998b8b;
+  width: 100%; 
+  display: flex;
+  justify-content: space-between;
+}
+.link {
+  color: white;
+}
+.message {
+  color: white;
+  text-decoration: none;
+}
+.NotificationContainer {
+  background: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }

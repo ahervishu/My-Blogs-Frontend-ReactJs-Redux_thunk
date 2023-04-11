@@ -1,0 +1,24 @@
+.conatiner {
+  /* margin: 1%; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.profile {
+  width: 100%;
+}
+.backgroundImg {
+  height: 120px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEmWiDRYj2Df2fokGwU250aYZFFbOUiHjPLHD8bkVD&s");
+}
+.avtar {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: -30px;
+}

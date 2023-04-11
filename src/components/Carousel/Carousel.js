@@ -34,6 +34,7 @@ export const Carousel = () => {
         rightChevron={'>'}
         outsideChevron
         chevronWidth={chevronWidth}
+        style={{position:''}}
       >
         {categories.map((d) => <div key={d.name}>{d.name}</div>)}
       </ItemsCarousel>

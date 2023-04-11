@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  width: 70%;
+  margin: auto;
+  /* text-align: center; */
+  right: 150px;
+  padding: 25px;
+}
+.cards {
+  display: flex;
+  margin: auto;
+  background-color: rgb(149, 198, 198);
+}
+.cardBlog {
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  background: #00000038;
+}
+
+.header:hover {
+  cursor: grabbing !important;
+}
+.blogContent {
+  color: rgb(255, 255, 255);
+  max-height: 75px;
+  overflow: hidden;
+  align-items: start;
+}
+
+.blogImg {
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80% !important;
+  height: auto !important;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3;
+}
+.buttons {
+  margin: 5px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 12px;
+    text-align: center;
+  }
+}

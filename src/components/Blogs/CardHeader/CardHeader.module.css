@@ -27,3 +27,12 @@ hr {
   margin: 0;
   align-items: start;
 }
+
+.category{
+  /* text-align: end; */
+  align-self: end;
+  color:brown;
+
+  padding: 0 15px;
+  
+}

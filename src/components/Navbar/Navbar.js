@@ -1,70 +1,44 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import style from "./Navbar.module.css";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import Notifications from "../Notifications/Notifications";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { IconContext } from "react-icons";
+import style from "./Navbar.module.css";
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import axios from "axios";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
+// console.log("users--->", users);
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
-
-export default function Navbar(props) {
+export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const [sidebar, setSidebar] = React.useState(false);
+
+  const [notification, setNotification] = React.useState(null);
+
+  const showSidebar = () => setSidebar(!sidebar);
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const users = JSON.parse(localStorage.getItem("userdata"));
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -83,15 +57,58 @@ export default function Navbar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const navigate = useNavigate();
+
   const getLogout = () => {
     localStorage.clear();
-    // navigate("/");
+    handleMenuClose();
+    navigate("/");
   };
-  const getLogin = () => {
-    navigate('/');
+
+  const getProfile = () => {
+    console.log("profile");
+    navigate(`/profile/${users.username}`);
+  };
+  const deleteNotification = (nid) => {
+    console.log(nid,' delete success')
   }
 
-  const { fname, lname } = props.user;
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:2023/notification/notifications")
+      .then((res) => setNotification(res.data));
+  });
+
+  if (!notification) return null;
+  // console.log("notification -- > ", notification.length);
+  const notifivationBar = (
+    <div className="notification">
+      <nav className={sidebar ? "nav-menu " : "nav-menu active"}>
+        <ul className="nav-menu-items" >
+          <li className="navbar-toggle">
+            <Link to="#" className="menu-bars">
+              <AiIcons.AiOutlineClose onClick={showSidebar} />
+            </Link>
+          </li>
+          {notification.map((item, index) => {
+            return (
+              <div key={index} className={style.NotificationContainer} >
+                {" "}
+                <div  className={style.lists}>
+                  <div className={style.link}>
+                    {item.icon}
+                    <span className={style.message}>{item.message}</span>
+                  </div>
+                  <div>
+                    <DeleteTwoToneIcon onClick={()=>deleteNotification(item.nid)}/>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
+  );
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -110,8 +127,8 @@ export default function Navbar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={getProfile}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
       <MenuItem onClick={getLogout}>Sign out</MenuItem>
     </Menu>
   );
@@ -133,7 +150,11 @@ export default function Navbar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem
+        onClick={() => {
+          navigate(`/blogs/${users.username}/${users.uid}/writeNew`);
+        }}
+      >
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <BorderColorIcon />
         </IconButton>
@@ -152,14 +173,15 @@ export default function Navbar(props) {
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          onClick={showSidebar}
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={notification.length} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={getProfile}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -171,6 +193,18 @@ export default function Navbar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem onClick={getLogout}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <LogoutIcon />
+        </IconButton>
+        <p>Sign Out</p>
+      </MenuItem>
     </Menu>
   );
 
@@ -178,7 +212,7 @@ export default function Navbar(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -186,30 +220,24 @@ export default function Navbar(props) {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            BLOGS
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search Blogs…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={() => {
+                navigate(`/blogs/${users.username}/${users.uid}/writeNew`);
+              }}
             >
               <BorderColorIcon />
             </IconButton>
@@ -226,44 +254,37 @@ export default function Navbar(props) {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              // onClick={()=><Notifications />}
+              onClick={showSidebar}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={notification.length} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            {localStorage.getItem("login") ? (
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <div className={style.accountIcon}>
-                  <AccountCircle className={style.AccountCircle} />
-                  <small>{fname + " " + lname}</small>
+            {notifivationBar}
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <div>
+                <div>
+                  <AccountCircle />
                 </div>
-              </IconButton>
-            ) : (
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={getLogin}
-                color="inherit"
-              >
-                <div className={style.accountIcon}>
-                  <AccountCircle className={style.AccountCircle} />
-                  <small>sign In</small>
-                </div>
-              </IconButton>
-            )}
+                <div style={{ fontSize: "10px" }}>{users.username}</div>
+              </div>
+            </IconButton>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              justifyContent: "start",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="show more"
@@ -272,8 +293,15 @@ export default function Navbar(props) {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
+            <Typography
+              size="large"
+              color="inherit"
+              sx={{ position: "absolute", left: "10px", top: "15px" }}
+            >
+              BLOGS
+            </Typography>
           </Box>
         </Toolbar>
       </AppBar>

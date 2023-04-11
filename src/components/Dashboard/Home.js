@@ -7,6 +7,7 @@ import styles from "./Home.module.css";
 import { Grid } from "@mui/material";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Footer from "../Footer/Footer";
 // import { useSelector } from "react-redux";
 
 const Home = () => {
@@ -34,6 +35,8 @@ const Home = () => {
 
   if (!user) return null;
 
+  const users = JSON.parse(localStorage.getItem("userdata"));
+
   return (
     <div>
       {user.map((user) => {
@@ -41,11 +44,12 @@ const Home = () => {
           return (
             <div key={user.uid}>
               <Navbar user={user} />
-              <div style={{ margin: 'auto', padding:'2px'}}>
+              <div style={{ margin: "auto", padding: "2px", width: "90%" }}>
                 <Grid
                   container
                   spacing={{ xs: 1, md: 1 }}
                   columns={{ xs: 1, sm: 8, md: 10 }}
+                  className={styles.grid}
                 >
                   <Grid item xs={2} sm={4} md={7}>
                     <LeftPanel />
@@ -55,6 +59,7 @@ const Home = () => {
                   </Grid>
                 </Grid>
               </div>
+              <Footer />
             </div>
           );
         }

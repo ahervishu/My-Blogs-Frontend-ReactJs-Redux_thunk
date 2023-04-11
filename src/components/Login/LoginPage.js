@@ -35,7 +35,6 @@ export const LoginPage = () => {
       <form>
         <div className={style.container}>
           <h2>Login</h2>
-          {/* <label style={{ color: "red" }}>{invalidErrorMsg}</label> */}
           <TextField
             name="username"
             className={style.inputText}

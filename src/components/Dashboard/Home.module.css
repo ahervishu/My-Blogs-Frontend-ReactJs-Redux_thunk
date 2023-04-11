@@ -1,7 +1,33 @@
 .container {
-    height: auto;
-    background-color: rgb(188, 51, 51);
-    margin:  30px auto;
+  height: auto;
+  background-color: rgb(188, 51, 51);
+  margin: 30px auto;
+  text-align: center;
+  padding: 15px;
+}
+.rightPanel {
+  padding: 40px;
+}
+.grid{
+    padding: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 12px;
     text-align: center;
-    padding: 15px;
+  }
+
+  .rightPanel{
+    width: 100%;
+    color: aliceblue;
+  }
+  .grid{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
 }
